@@ -21,7 +21,7 @@ Please treat this project under this license.
 
 # How do I get started?
 
-For easy usage please read quickstart.
+For easy usage please read [quickstart](docs/quickstart.md).
 
 For more detailed usage, please read the usage documentation.
 
