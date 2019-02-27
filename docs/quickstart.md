@@ -21,7 +21,7 @@ Please create Hadoop installation and execution environment of MapReduce.
 In this example, JSON data is assumed to be input data.
 With this data as input, we create a table in Yosegi format and read data from the table.
 
-Create the following csv file.In this example, to illustrate writing to and reading from the table, the data is a simple example.
+Create the following JSON file. Following example is for illustrating to write and read simple data from the table.
 If you already have a table, you still have the input.
 
 ```
@@ -38,8 +38,8 @@ __JSON__
 ## Create yosegi file
 Load json file and create yosegi file.
 
-The sample code for MapReduce is this.
-This class is included in the jar.
+Following code is a sample for MapReduce.
+This class should be included in the jar file.
 
 ```
 package jp.co.yahoo.yosegi.hadoop.mapreduce;
@@ -118,8 +118,8 @@ CLASSPATH=./yosegi.jar yarn jar yosegi-hadoop-0.9.0.jar jp.co.yahoo.yosegi.hadoo
 ## Read yosegi file
 Read as a data frame from yosegi file.
 
-The sample code for MapReduce is this.
-This class is included in the jar.
+Following code is a sample for MapReduce.
+This class should be included in the jar file.
 
 ```
 package jp.co.yahoo.yosegi.hadoop.mapreduce;
