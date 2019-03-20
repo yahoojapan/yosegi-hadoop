@@ -74,6 +74,7 @@ public class YosegiSpreadReader extends RecordReader<NullWritable, Spread> {
     long start = fileSplit.getStart();
     long length = fileSplit.getLength();
     InputStream in = fs.open( path );
+    setStream( in , fileLength , start , length );
   }
 
   public void setStream(
