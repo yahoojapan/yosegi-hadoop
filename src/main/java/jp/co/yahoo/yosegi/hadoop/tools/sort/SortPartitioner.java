@@ -50,11 +50,7 @@ public class SortPartitioner extends Partitioner<Text, Text> implements Configur
       return rnd.nextInt( numPartitions );
     }
 
-    if ( data.length != 2 ) {
-      return Math.abs( data[0].hashCode() % numPartitions );
-    }
-
-    if ( data[1].length() == 0 ) {
+    if ( data.length != 2 || data[1].length() == 0 ) {
       return Math.abs( data[0].hashCode() % numPartitions );
     }
 
