@@ -49,6 +49,7 @@ import java.io.OutputStreamWriter;
 
 public class LogSampler extends Configured implements Tool {
 
+  // from Hadoop's block size
   public static final String DEFAULT_SPREAD_COUNT = "5";
 
   /**
