@@ -36,13 +36,13 @@ public class LogSamplerMapper extends Mapper<NullWritable , Spread, LongWritable
 
   private final JacksonMessageWriter writer = new JacksonMessageWriter();
   private final Random rnd = new Random();
-  private long sampleCount = 5;
+  private long sampleCount = 0;
   private long spreads = 0; 
 
   @Override
   protected void setup( final  Context context ) throws IOException, InterruptedException {
     Configuration config = context.getConfiguration();
-    sampleCount = config.getLong( "yosegi.tools.logsampler.samples" , 5 );
+    sampleCount = config.getLong( "yosegi.tools.logsampler.samples" , 0 );
     spreads = config.getLong( "yosegi.tools.logsampler.spreads" , 0 );
     if ( spreads <= 0 ) {
       spreads = 1;

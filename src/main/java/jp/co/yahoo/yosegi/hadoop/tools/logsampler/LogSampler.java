@@ -49,6 +49,8 @@ import java.io.OutputStreamWriter;
 
 public class LogSampler extends Configured implements Tool {
 
+  public static final String DEFAULT_SPREAD_COUNT = "5";
+
   /**
    * Create options.
    */
@@ -172,7 +174,7 @@ public class LogSampler extends Configured implements Tool {
   }
 
   /**
-   * Create input file list.
+   * Output usage.
    */
   public static void printHelp( final String[] args ) {
     HelpFormatter hf = new HelpFormatter();
@@ -200,7 +202,7 @@ public class LogSampler extends Configured implements Tool {
 
     String output = cl.getOptionValue( "output" , null );
     Path outputPath = createOutputDirectoryPath( output );
-    long sampleCount =  Long.parseLong( cl.getOptionValue( "spread" , "5" ) );
+    long sampleCount =  Long.parseLong( cl.getOptionValue( "spread" , DEFAULT_SPREAD_COUNT ) );
 
     long spreadCount = getSpreadCount( inputPath );
 
