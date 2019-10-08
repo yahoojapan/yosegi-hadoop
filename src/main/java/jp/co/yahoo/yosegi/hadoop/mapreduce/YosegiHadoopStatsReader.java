@@ -18,8 +18,8 @@
 
 package jp.co.yahoo.yosegi.hadoop.mapreduce;
 
-import jp.co.yahoo.yosegi.reader.YosegiReader;
-import jp.co.yahoo.yosegi.spread.Spread;
+import jp.co.yahoo.yosegi.reader.YosegiStatsReader;
+import jp.co.yahoo.yosegi.stats.SpreadSummaryStats;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
@@ -32,11 +32,12 @@ import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
-public class YosegiSpreadReader extends RecordReader<NullWritable, Spread> {
+public class YosegiHadoopStatsReader extends RecordReader<NullWritable, List<SpreadSummaryStats>> {
 
-  private final YosegiReader currentReader = new YosegiReader();
-  private Spread currentSpread;
+  private final YosegiStatsReader currentReader = new YosegiStatsReader();
+  private boolean hasNext = true;
 
   @Override
   public NullWritable getCurrentKey() throws IOException, InterruptedException {
@@ -44,14 +45,14 @@ public class YosegiSpreadReader extends RecordReader<NullWritable, Spread> {
   }
 
   @Override
-  public Spread getCurrentValue() throws IOException, InterruptedException {
-    return currentSpread;
+  public List<SpreadSummaryStats> getCurrentValue() throws IOException, InterruptedException {
+    return currentReader.getSpreadSummaryStatsList();
   }
 
   @Override
   public boolean nextKeyValue() throws IOException, InterruptedException {
-    if ( currentReader.hasNext() ) {
-      currentSpread = currentReader.next();
+    if ( hasNext ) {
+      hasNext = false;
       return true;
     }
     return false;
@@ -82,14 +83,11 @@ public class YosegiSpreadReader extends RecordReader<NullWritable, Spread> {
       final long fileLength ,
       final long start ,
       final long length ) throws IOException {
-    currentReader.setNewStream(
+    currentReader.readStream(
         in , fileLength , new jp.co.yahoo.yosegi.config.Configuration() , start , length );
   }
 
   @Override
-  public void close() throws IOException {
-    if ( currentReader != null ) {
-      currentReader.close();
-    }
-  }
+  public void close() throws IOException {}
+
 }
