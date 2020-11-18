@@ -48,10 +48,12 @@ public class YosegiCombineSpreadReader extends RecordReader<NullWritable, Spread
     Path path = split.getPath( index );
     FileSystem fs = path.getFileSystem( config );
     long fileLength = fs.getLength( path );
+    long start = split.getOffset(index);
+    long length = split.getLength(index);
     InputStream in = fs.open( path );
 
     innerReader = new YosegiSpreadReader();
-    innerReader.setStream( in , fileLength , 0 , fileLength );
+    innerReader.setStream( in , fileLength , start , length );
   }
 
   @Override
